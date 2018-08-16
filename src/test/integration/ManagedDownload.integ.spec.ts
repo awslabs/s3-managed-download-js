@@ -1,4 +1,4 @@
-import { ManagedDownload, GetObjectStreamInput } from './ManagedDownload';
+import { ManagedDownload, GetObjectStreamInput } from '../../ManagedDownload';
 import * as S3 from 'aws-sdk/clients/s3';
 import { Stream, Writable } from 'stream';
 import * as crypto from 'crypto';
