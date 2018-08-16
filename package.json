@@ -5,7 +5,8 @@
   "main": "./build/index.js",
   "scripts": {
     "pretest": "tsc -p tsconfig.test.json",
-    "test": "jest --coverage",
+    "test": "jest 'test/unit/*' --coverage",
+    "integrationtest": "tsc -p tsconfig.test.json && jest test/integration/*",
     "documentation": "typedoc --readme README.md --exclude '**/*.spec.ts, **/index.ts' --out docs",
     "build": "tsc -p tsconfig.json",
     "prepublishOnly": "tsc -p tsconfig.json"

@@ -1,7 +1,7 @@
-import { ManagedDownload, ManagedDownloadOptions, GetObjectStreamInput } from './ManagedDownload';
+import { ManagedDownload, ManagedDownloadOptions, GetObjectStreamInput } from '../../ManagedDownload';
 import * as S3 from 'aws-sdk/clients/s3';
-import { getRangeOfPart } from './getRangeOfPart';
-import { getInformationFromRange } from './getInformationFromRange';
+import { getRangeOfPart } from '../../getRangeOfPart';
+import { getInformationFromRange } from '../../getInformationFromRange';
 import { PassThrough } from 'stream';
 
 const getObjectMockOutput = (contentRange:string, body:Buffer = new Buffer('')) => {
