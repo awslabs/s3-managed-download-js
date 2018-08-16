@@ -1,0 +1,15 @@
+node_modules
+package-lock.json
+coverage/*
+.DS_Store
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+tsconfig.*
+src/*
+docs/*
+build/*.spec
+.github/*
+LICENSE
+NOTICE
+.gitignore
+.npmignore

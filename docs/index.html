@@ -1,0 +1,305 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@aws/s3-managed-download</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@aws/s3-managed-download</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> @aws/s3-managed-download</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="aws-sdk-javascript-s3-managed-download">AWS SDK JavaScript S3 Managed Download</h1>
+				<p>The JavaScript SDK Managed Download can be used for custom S3 downloads. The client can configure options for the Managed Download such as chunk size and number of concurrent transfers.</p>
+				<h2 id="installing">Installing</h2>
+				<h3 id="in-node-js">In Node.js</h3>
+				<p>This package only works in Node.js versions 6+ currently. Use the npm package manager for Node.js to install the Managed Download package. Type the following command in a terminal window.</p>
+				<pre><code>    <span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">install</span> @<span class="hljs-keyword">aws</span>/<span class="hljs-keyword">s3</span>-<span class="hljs-keyword">managed</span>-<span class="hljs-keyword">download</span>
+</code></pre><h2 id="documentation">Documentation</h2>
+				<p>You can find the full documentation for the Managed Download <a href="">here</a>.</p>
+				<h2 id="configuration">Configuration</h2>
+				<p>You can customize the part size and number of concurrent downloads for the Managed Download by setting the maxPartSize and maxConcurrency options. The maxPartSize option controls the size in bytes of each part of the transfer. The maxConcurrency option specifies the number of parts that will be downloaded in parallel and the maximum number of parts that will be buffered in memory at any time. </p>
+				<h3 id="import-the-managed-download-package">Import the Managed Download package</h3>
+				<p>You will need an S3 client in order to create a managed download, so import the aws-sdk along with the managed download package.</p>
+				<h4 id="javascript">JavaScript</h4>
+				<pre><code>    <span class="hljs-keyword">const</span> S3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk/clients/s3'</span>);
+    <span class="hljs-keyword">const</span> ManagedDownload = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownload;
+</code></pre><h4 id="typescript">TypeScript</h4>
+				<pre><code>    <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> S3 <span class="hljs-keyword">from</span> <span class="hljs-string">'aws-sdk/clients/s3'</span>;
+    <span class="hljs-keyword">import</span> { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
+</code></pre><h3 id="create-a-managed-download-with-the-default-part-size-and-concurrency">Create a Managed Download with the default part size and concurrency</h3>
+				<p>Create an AWS S3 client and pass the client into the Managed Download constructor to create a Managed Download with a part size of 5MB and concurrency of 1.</p>
+				<h4 id="javascript">JavaScript</h4>
+				<pre><code>    const <span class="hljs-built_in">s3</span> = new <span class="hljs-built_in">S3</span>()<span class="hljs-comment">;</span>
+    const managedDownload = new ManagedDownload(<span class="hljs-built_in">s3</span>)<span class="hljs-comment">;</span>
+</code></pre><h4 id="typescript">TypeScript</h4>
+				<pre><code>    const <span class="hljs-built_in">s3</span>:<span class="hljs-built_in">S3</span> = new <span class="hljs-built_in">S3</span>()<span class="hljs-comment">;</span>
+    const managedDownload:ManagedDownload = new ManagedDownload(<span class="hljs-built_in">s3</span>)<span class="hljs-comment">;</span>
+</code></pre><h3 id="create-a-managed-download-with-custom-part-size-and-concurrency">Create a Managed Download with custom part size and concurrency</h3>
+				<p>Create an AWS S3 client and Managed Download options. Pass the client and the options into the Managed Download constructor to create a Managed Download with a custom part size of 10MB and concurrency of 5.</p>
+				<h4 id="javascript">JavaScript</h4>
+				<pre><code>    const <span class="hljs-built_in">s3</span> = new <span class="hljs-built_in">S3</span>()<span class="hljs-comment">;</span>
+    const options = {
+<span class="hljs-symbol">        maxPartSize:</span> <span class="hljs-number">10</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>,
+<span class="hljs-symbol">        maxConcurrency:</span> <span class="hljs-number">5</span>
+    }<span class="hljs-comment">;</span>
+    const managedDownload = new ManagedDownload(<span class="hljs-built_in">s3</span>, options)<span class="hljs-comment">;</span>
+</code></pre><h4 id="typescript">TypeScript</h4>
+				<pre><code>    const <span class="hljs-built_in">s3</span>:<span class="hljs-built_in">S3</span> = new <span class="hljs-built_in">S3</span>()<span class="hljs-comment">;</span>
+    const options:ManagedDownloadOptons = {
+<span class="hljs-symbol">        maxPartSize:</span> <span class="hljs-number">10</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>,
+<span class="hljs-symbol">        maxConcurrency:</span> <span class="hljs-number">5</span>
+    }<span class="hljs-comment">;</span>
+    const managedDownload:ManagedDownload = new ManagedDownload(<span class="hljs-built_in">s3</span>, options)<span class="hljs-comment">;</span>
+</code></pre><h2 id="examples">Examples</h2>
+				<p>Currently, the Managed Download only contains a streaming download operation which can work for an entire file or a specific range or part of a file. Here are some examples on
+				how to use the Managed Download&#39;s getObjectStream download operation.</p>
+				<h3 id="1-use-the-managed-download-object-to-create-a-download-stream-for-a-file-on-s3">1. Use the Managed Download object to create a download stream for a file on S3</h3>
+				<p>Get the file &#39;example-key&#39; from the bucket &#39;example-bucket&#39; and use the getObjectStream method to create a local file at &#39;example-file-path&#39;.</p>
+				<h4 id="javascript">JavaScript</h4>
+				<pre><code>    <span class="hljs-keyword">const</span> S3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk/clients/s3'</span>);
+    <span class="hljs-keyword">const</span> ManagedDownload = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownload;
+    <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+
+    <span class="hljs-keyword">const</span> s3 = <span class="hljs-keyword">new</span> S3();
+    <span class="hljs-keyword">const</span> managedDownload = <span class="hljs-keyword">new</span> ManagedDownload(s3);
+
+    <span class="hljs-keyword">const</span> params = {
+        Bucket: <span class="hljs-string">'example-bucket'</span>,
+        Key: <span class="hljs-string">'example-key'</span>
+    };
+    <span class="hljs-comment">// create a write stream for a file</span>
+    <span class="hljs-keyword">const</span> writeStream = fs.createWriteStream(<span class="hljs-string">'example-file-path'</span>);
+
+    managedDownload.getObjectStream(params)
+    .then(<span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
+        stream.pipe(writeStream);
+    }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        writeStream.end();
+        <span class="hljs-built_in">console</span>.error(err);
+    });
+</code></pre><h4 id="typescript">TypeScript</h4>
+				<pre><code>    <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> S3 <span class="hljs-keyword">from</span> <span class="hljs-string">'aws-sdk/clients/s3'</span>;
+    <span class="hljs-keyword">import</span> { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
+    <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
+
+    <span class="hljs-keyword">const</span> s3:S3 = <span class="hljs-keyword">new</span> S3();
+    <span class="hljs-keyword">const</span> managedDownload:ManagedDownload = <span class="hljs-keyword">new</span> ManagedDownload(s3);
+
+    <span class="hljs-keyword">const</span> params:GetObjectStreamInput = {
+        Bucket: <span class="hljs-string">'example-bucket'</span>,
+        Key: <span class="hljs-string">'example-key'</span>
+    };
+    <span class="hljs-comment">// create a write stream for a file</span>
+    <span class="hljs-keyword">const</span> writeStream:fs.WriteStream = fs.createWriteStream(<span class="hljs-string">'example-file-path'</span>);
+
+    managedDownload.getObjectStream(params)
+    .then(<span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
+        stream.pipe(writeStream);
+    }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        writeStream.end();
+        <span class="hljs-built_in">console</span>.error(err);
+    });
+</code></pre><h3 id="2-use-the-managed-download-object-to-create-a-download-stream-for-a-range-of-bytes-of-a-file-on-s3">2. Use the Managed Download object to create a download stream for a range of bytes of a file on S3</h3>
+				<p>Get the file &#39;example-key&#39; from the bucket &#39;example-bucket&#39; and use the getObjectStream method to write to bytes 100-150 of a local file at &#39;example-file-path&#39;.</p>
+				<h4 id="javascript">JavaScript</h4>
+				<pre><code>    <span class="hljs-keyword">const</span> S3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk/clients/s3'</span>);
+    <span class="hljs-keyword">const</span> ManagedDownload = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownload;
+    <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+
+    <span class="hljs-keyword">const</span> s3 = <span class="hljs-keyword">new</span> S3();
+    <span class="hljs-keyword">const</span> managedDownload = <span class="hljs-keyword">new</span> ManagedDownload(s3);
+
+    <span class="hljs-keyword">const</span> params = {
+        Bucket: <span class="hljs-string">'example-bucket'</span>,
+        Key: <span class="hljs-string">'example-key'</span>,
+        Range: <span class="hljs-string">'100-150'</span>
+    };
+    <span class="hljs-comment">// create a write stream for a file starting at byte 100</span>
+    <span class="hljs-keyword">const</span> writeStream = fs.createWriteStream(<span class="hljs-string">'example-file-path'</span>, {start:<span class="hljs-number">100</span>});
+
+    managedDownload.getObjectStream(params)
+    .then(<span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
+        stream.pipe(writeStream);
+    }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        writeStream.end();
+        <span class="hljs-built_in">console</span>.error(err);
+    });
+</code></pre><h4 id="typescript">TypeScript</h4>
+				<pre><code>    <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> S3 <span class="hljs-keyword">from</span> <span class="hljs-string">'aws-sdk/clients/s3'</span>;
+    <span class="hljs-keyword">import</span> { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
+    <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
+
+    <span class="hljs-keyword">const</span> s3:S3 = <span class="hljs-keyword">new</span> S3();
+    <span class="hljs-keyword">const</span> managedDownload:ManagedDownload = <span class="hljs-keyword">new</span> ManagedDownload(s3);
+
+    <span class="hljs-keyword">const</span> params:GetObjectStreamInput = {
+        Bucket: <span class="hljs-string">'example-bucket'</span>,
+        Key: <span class="hljs-string">'example-key'</span>,
+        Range: <span class="hljs-string">'100-150'</span>
+    };
+    <span class="hljs-comment">// create a write stream for a file starting at byte 100</span>
+    <span class="hljs-keyword">const</span> writeStream:fs.WriteStream = fs.createWriteStream(<span class="hljs-string">'example-file-path'</span>, {start:<span class="hljs-number">100</span>});
+
+    managedDownload.getObjectStream(params)
+    .then(<span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
+        stream.pipe(writeStream);
+    }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        writeStream.end();
+        <span class="hljs-built_in">console</span>.error(err);
+    });
+</code></pre><h2 id="opening-issues">Opening Issues</h2>
+				<p>If you find any bugs or want to request a new feature, please first check the existing issues. If there is not already an issue, then open a new issue. If the issue is regarding a bug, please include the stack trace and a method to recreate it.</p>
+				<h2 id="license">License</h2>
+				<p>This library is licensed under the Apache 2.0 License. </p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_manageddownload_.html">"<wbr>Managed<wbr>Download"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_manageddownloadstream_.html">"<wbr>Managed<wbr>Download<wbr>Stream"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_getinformationfromrange_.html">"get<wbr>Information<wbr>From<wbr>Range"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_getrangeofpart_.html">"get<wbr>Range<wbr>OfPart"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
