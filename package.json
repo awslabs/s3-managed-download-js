@@ -6,8 +6,7 @@
   "scripts": {
     "pretest": "tsc -p tsconfig.test.json",
     "test": "jest 'test/unit/*' --coverage",
-    "preintegrationtest": "tsc -p tsconfig.test.json",
-    "integrationtest": "jest test/integration/*",
+    "integrationtest": "tsc -p tsconfig.test.json && jest test/integration/*",
     "documentation": "typedoc --readme README.md --exclude '**/*.spec.ts, **/index.ts' --out docs",
     "build": "tsc -p tsconfig.json",
     "prepublishOnly": "tsc -p tsconfig.json"
