@@ -7,7 +7,7 @@
     "pretest": "tsc -p tsconfig.test.json",
     "test": "jest 'test/unit/*' --coverage",
     "integrationtest": "tsc -p tsconfig.test.json && jest test/integration/*",
-    "documentation": "typedoc --readme README.md --exclude '**/*.spec.ts, **/index.ts' --out docs",
+    "documentation": "typedoc --readme README.md --exclude '**/*.spec.ts, **/index.ts' --out docs && touch ./docs/.nojekyll",
     "build": "tsc -p tsconfig.json",
     "prepublishOnly": "tsc -p tsconfig.json"
   },
