@@ -1,16 +1,16 @@
 /**
- * The ManagedDownload uses an s3 client for custom efficient
+ * The ManagedDownloader uses an s3 client for custom efficient
  * downloads from s3.
  */
 import * as S3 from 'aws-sdk/clients/s3';
 import { getRangeOfPart } from './getRangeOfPart';
 import { getInformationFromRange } from './getInformationFromRange';
-import { ManagedDownloadStream } from './ManagedDownloadStream';
+import { ManagedDownloaderStream } from './ManagedDownloaderStream';
 
 /**
  * Custom options for the Managed Download.
  */
-export interface ManagedDownloadOptions {
+export interface ManagedDownloaderOptions {
     /**
      * @param maxPartSize size of a part in bytes.
      * @param maxConcurrency number of parts to download
@@ -41,11 +41,11 @@ export interface GetObjectStreamInput {
 }
 
 /**
- * The ManagedDownload class handles custom S3 downloads. 
+ * The ManagedDownloader class handles custom S3 downloads. 
  * A client can set options for the download such as
  * the part size and the concurrency.
  */
-export class ManagedDownload {
+export class ManagedDownloader {
 
     /**
      * @param maxPartSize max part size of download in bytes.
@@ -55,7 +55,7 @@ export class ManagedDownload {
     private readonly maxConcurrency:number
 
     /**
-     * Create a ManagedDownload object with an
+     * Create a ManagedDownloader object with an
      * s3 client and custom options if provided.
      *
      * @param client an S3 client to make requests.
@@ -64,7 +64,7 @@ export class ManagedDownload {
      * @throws Error if maxPartSize is not a positive number.
      * @throws Error if concurrency is not a positive number.
      */
-    constructor(private readonly client:S3, options:ManagedDownloadOptions = {}) {
+    constructor(private readonly client:S3, options:ManagedDownloaderOptions = {}) {
         if (!client) {
             throw new Error('S3 client must be provided');
         }
@@ -104,14 +104,14 @@ export class ManagedDownload {
      *      Range(optional):string,
      *      PartNumber(optional):number
      *  }.
-     * @return ManagedDownloadStream the PassThrough stream to read
+     * @return ManagedDownloaderStream the PassThrough stream to read
      *  file data from.
      * @throws Error if params is in the incorrect format.
      */
     async getObjectStream(
         params: GetObjectStreamInput
-    ):Promise<ManagedDownloadStream> {
-        const destinationStream = new ManagedDownloadStream();
+    ):Promise<ManagedDownloaderStream> {
+        const destinationStream = new ManagedDownloaderStream();
         let contentLength;
         let byteOffset;
         if (typeof(params) !== 'object' || !params.Bucket || !params.Key) {
@@ -160,7 +160,7 @@ export class ManagedDownload {
      * 
      * @param params params object contains the bucket
      *  and key.
-     * @param destinationStream the ManagedDownloadStream stream
+     * @param destinationStream the ManagedDownloaderStream stream
      *  transferring the parts of a file.
      * @param contentLength the length of the file.
      * @param byteOffset if available, the amount to add to start
@@ -169,7 +169,7 @@ export class ManagedDownload {
      */
     private async downloadByParts(
         params:GetObjectStreamInput,
-        destinationStream:ManagedDownloadStream,
+        destinationStream:ManagedDownloaderStream,
         contentLength:number,
         byteOffset:number = 0,
         startingPart:number = 0
@@ -217,7 +217,7 @@ export class ManagedDownload {
      *  event.
      */
     private waitForDrainEvent(
-        destinationStream:ManagedDownloadStream
+        destinationStream:ManagedDownloaderStream
     ):Promise<void> {
         return new Promise((resolve) => {
             destinationStream.once('drain', () => {

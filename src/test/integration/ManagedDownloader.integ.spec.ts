@@ -1,4 +1,4 @@
-import { ManagedDownload, GetObjectStreamInput } from '../../ManagedDownload';
+import { ManagedDownloader, GetObjectStreamInput } from '../../ManagedDownloader';
 import * as S3 from 'aws-sdk/clients/s3';
 import { Stream, Writable } from 'stream';
 import * as crypto from 'crypto';
@@ -58,10 +58,10 @@ describe('getObjectStream tests', () => {
             Bucket:testBucketName
         };
         // this maxPartSize option will split the file into 4 parts
-        const managedDownload:ManagedDownload = new ManagedDownload(s3client, {maxPartSize:getMaxPartSize(4, fileLength)});
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(s3client, {maxPartSize:getMaxPartSize(4, fileLength)});
         let s3Checksum:string;
         let s3Promise = promisifyStreamOutput(
-            await managedDownload.getObjectStream(source));
+            await managedDownloader.getObjectStream(source));
         s3Checksum = await s3Promise;
         expect(s3Checksum).toBe(fileChecksum);
     });
@@ -72,10 +72,10 @@ describe('getObjectStream tests', () => {
             Bucket:testBucketName
         };
         // this maxPartSize option will split the file into 1 part
-        const managedDownload:ManagedDownload = new ManagedDownload(s3client, {maxPartSize:getMaxPartSize(1, fileLength)});
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(s3client, {maxPartSize:getMaxPartSize(1, fileLength)});
         let s3Checksum:string;
         let s3Promise = promisifyStreamOutput(
-            await managedDownload.getObjectStream(source));
+            await managedDownloader.getObjectStream(source));
         s3Checksum = await s3Promise;
         expect(s3Checksum).toBe(fileChecksum);
     });
@@ -87,10 +87,10 @@ describe('getObjectStream tests', () => {
             Range:"bytes=3200-12800"
         };
         // this maxPartSize option will split the file into 4 parts
-        const managedDownload:ManagedDownload = new ManagedDownload(s3client, {maxPartSize:getMaxPartSize(4, fileLength)});
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(s3client, {maxPartSize:getMaxPartSize(4, fileLength)});
         let s3Checksum:string;
         let s3Promise = promisifyStreamOutput(
-            await managedDownload.getObjectStream(source));
+            await managedDownloader.getObjectStream(source));
         s3Checksum = await s3Promise;
         expect(s3Checksum).toBe(rangeChecksum);
     });
@@ -100,10 +100,10 @@ describe('getObjectStream tests', () => {
             Key:'doesntexist.txt',
             Bucket:'doesntexist'
         }
-        const managedDownload:ManagedDownload = new ManagedDownload(s3client);
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(s3client);
         let downloadError:Error|undefined;
         try {
-            await managedDownload.getObjectStream(source);
+            await managedDownloader.getObjectStream(source);
         } catch(err) {
             downloadError = err;
         }
@@ -151,10 +151,10 @@ describe('getObjectStream tests', () => {
                 PartNumber: 1,
                 Range:'bytes=101-202'
             };
-            const managedDownload:ManagedDownload = new ManagedDownload(s3client);
+            const managedDownloader:ManagedDownloader = new ManagedDownloader(s3client);
             let downloadError:Error|undefined;
             try {
-                await managedDownload.getObjectStream(source);
+                await managedDownloader.getObjectStream(source);
             } catch(err) {
                 downloadError = err;
             }
@@ -167,10 +167,10 @@ describe('getObjectStream tests', () => {
                 Bucket:testBucketName,
                 PartNumber: 5
             };
-            const managedDownload:ManagedDownload = new ManagedDownload(s3client);
+            const managedDownloader:ManagedDownloader = new ManagedDownloader(s3client);
             let downloadError:Error|undefined;
             try {
-                await managedDownload.getObjectStream(source);
+                await managedDownloader.getObjectStream(source);
             } catch(err) {
                 downloadError = err;
             }
@@ -184,10 +184,10 @@ describe('getObjectStream tests', () => {
                 Bucket:testBucketName,
                 PartNumber: 1
             };
-            const managedDownload:ManagedDownload = new ManagedDownload(s3client, {maxPartSize:getMaxPartSize(4, fileLength)});
+            const managedDownloader:ManagedDownloader = new ManagedDownloader(s3client, {maxPartSize:getMaxPartSize(4, fileLength)});
             let s3Checksum:string;
             let s3Promise = promisifyStreamOutput(
-                await managedDownload.getObjectStream(source));
+                await managedDownloader.getObjectStream(source));
             s3Checksum = await s3Promise;
             expect(s3Checksum).toBe(fileChecksum);
         });
@@ -198,10 +198,10 @@ describe('getObjectStream tests', () => {
                 Bucket:testBucketName,
                 PartNumber: 2
             };
-            const managedDownload:ManagedDownload = new ManagedDownload(s3client, {maxPartSize:1024*4});
+            const managedDownloader:ManagedDownloader = new ManagedDownloader(s3client, {maxPartSize:1024*4});
             let s3Checksum:string;
             let s3Promise = promisifyStreamOutput(
-                await managedDownload.getObjectStream(source));
+                await managedDownloader.getObjectStream(source));
             s3Checksum = await s3Promise;
             expect(s3Checksum).toBe(partHash);
         });
@@ -216,11 +216,11 @@ describe('getObjectStream tests', () => {
                 Key:testFileName,
                 Bucket:testBucketName
             };
-            const managedDownload:ManagedDownload = 
-                new ManagedDownload(s3client, {maxPartSize:getMaxPartSize(Math.floor(numParts/2), fileLength),maxConcurrency:numParts});
+            const managedDownloader:ManagedDownloader = 
+                new ManagedDownloader(s3client, {maxPartSize:getMaxPartSize(Math.floor(numParts/2), fileLength),maxConcurrency:numParts});
             let s3Checksum:string;
             let s3Promise = promisifyStreamOutput(
-                await managedDownload.getObjectStream(source));
+                await managedDownloader.getObjectStream(source));
             s3Checksum = await s3Promise;
             expect(s3Checksum).toBe(fileChecksum);
         });
@@ -230,11 +230,11 @@ describe('getObjectStream tests', () => {
                 Key:testFileName,
                 Bucket:testBucketName
             };
-            const managedDownload:ManagedDownload = 
-                new ManagedDownload(s3client, {maxPartSize:getMaxPartSize(numParts, fileLength),maxConcurrency:numParts});
+            const managedDownloader:ManagedDownloader = 
+                new ManagedDownloader(s3client, {maxPartSize:getMaxPartSize(numParts, fileLength),maxConcurrency:numParts});
             let s3Checksum:string;
             let s3Promise = promisifyStreamOutput(
-                await managedDownload.getObjectStream(source));
+                await managedDownloader.getObjectStream(source));
             s3Checksum = await s3Promise;
             expect(s3Checksum).toBe(fileChecksum);
         });
@@ -244,11 +244,11 @@ describe('getObjectStream tests', () => {
                 Key:testFileName,
                 Bucket:testBucketName
             };
-            const managedDownload:ManagedDownload = 
-                new ManagedDownload(s3client, {maxPartSize:getMaxPartSize(numParts*2, fileLength),maxConcurrency:numParts});
+            const managedDownloader:ManagedDownloader = 
+                new ManagedDownloader(s3client, {maxPartSize:getMaxPartSize(numParts*2, fileLength),maxConcurrency:numParts});
             let s3Checksum:string;
             let s3Promise = promisifyStreamOutput(
-                await managedDownload.getObjectStream(source));
+                await managedDownloader.getObjectStream(source));
             s3Checksum = await s3Promise;
             expect(s3Checksum).toBe(fileChecksum);
         });

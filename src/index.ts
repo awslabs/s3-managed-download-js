@@ -1,1 +1,1 @@
-export * from './ManagedDownload';
+export * from './ManagedDownloader';

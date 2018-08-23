@@ -25,12 +25,12 @@ You will need an S3 client in order to create a managed download, so import the 
 #### JavaScript
 
         const S3 = require('aws-sdk/clients/s3');
-        const ManagedDownload = require('@aws/s3-managed-download').ManagedDownload;
+        const ManagedDownloader = require('@aws/s3-managed-download').ManagedDownloader;
 
 #### TypeScript
 
         import * as S3 from 'aws-sdk/clients/s3';
-        import { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } from '@aws/s3-managed-download';
+        import { ManagedDownloader, GetObjectStreamInput, ManagedDownloaderOptions } from '@aws/s3-managed-download';
 
 ### Create a Managed Download with the default part size and concurrency
 
@@ -39,12 +39,12 @@ Create an AWS S3 client and pass the client into the Managed Download constructo
 #### JavaScript
         
         const s3 = new S3();
-        const managedDownload = new ManagedDownload(s3);
+        const managedDownloader = new ManagedDownloader(s3);
 
 #### TypeScript
 
         const s3:S3 = new S3();
-        const managedDownload:ManagedDownload = new ManagedDownload(s3);
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(s3);
         
 ### Create a Managed Download with custom part size and concurrency
 
@@ -57,16 +57,16 @@ Create an AWS S3 client and Managed Download options. Pass the client and the op
             maxPartSize: 10 * 1024 * 1024,
             maxConcurrency: 5
         };
-        const managedDownload = new ManagedDownload(s3, options);
+        const managedDownloader = new ManagedDownloader(s3, options);
 
 #### TypeScript
 
         const s3:S3 = new S3();
-        const options:ManagedDownloadOptons = {
+        const options:ManagedDownloaderOptons = {
             maxPartSize: 10 * 1024 * 1024,
             maxConcurrency: 5
         };
-        const managedDownload:ManagedDownload = new ManagedDownload(s3, options);
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(s3, options);
 
 ## Examples
 
@@ -82,11 +82,11 @@ Get the file 'example-key' from the bucket 'example-bucket' and use the getObjec
 #### JavaScript
 
         const S3 = require('aws-sdk/clients/s3');
-        const ManagedDownload = require('@aws/s3-managed-download').ManagedDownload;
+        const ManagedDownloader = require('@aws/s3-managed-download').ManagedDownloader;
         const fs = require('fs');
 
         const s3 = new S3();
-        const managedDownload = new ManagedDownload(s3);
+        const managedDownloader = new ManagedDownloader(s3);
 
         const params = {
             Bucket: 'example-bucket',
@@ -95,7 +95,7 @@ Get the file 'example-key' from the bucket 'example-bucket' and use the getObjec
         // create a write stream for a file
         const writeStream = fs.createWriteStream('example-file-path');
         
-        managedDownload.getObjectStream(params)
+        managedDownloader.getObjectStream(params)
         .then((stream) => {
             stream.pipe(writeStream);
         }, (err) => {
@@ -106,11 +106,11 @@ Get the file 'example-key' from the bucket 'example-bucket' and use the getObjec
 #### TypeScript
 
         import * as S3 from 'aws-sdk/clients/s3';
-        import { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } from '@aws/s3-managed-download';
+        import { ManagedDownloader, GetObjectStreamInput, ManagedDownloaderOptions } from '@aws/s3-managed-download';
         import * as fs from 'fs';
 
         const s3:S3 = new S3();
-        const managedDownload:ManagedDownload = new ManagedDownload(s3);
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(s3);
 
         const params:GetObjectStreamInput = {
             Bucket: 'example-bucket',
@@ -119,7 +119,7 @@ Get the file 'example-key' from the bucket 'example-bucket' and use the getObjec
         // create a write stream for a file
         const writeStream:fs.WriteStream = fs.createWriteStream('example-file-path');
         
-        managedDownload.getObjectStream(params)
+        managedDownloader.getObjectStream(params)
         .then((stream) => {
             stream.pipe(writeStream);
         }, (err) => {
@@ -134,11 +134,11 @@ Get the file 'example-key' from the bucket 'example-bucket' and use the getObjec
 #### JavaScript
 
         const S3 = require('aws-sdk/clients/s3');
-        const ManagedDownload = require('@aws/s3-managed-download').ManagedDownload;
+        const ManagedDownloader = require('@aws/s3-managed-download').ManagedDownloader;
         const fs = require('fs');
         
         const s3 = new S3();
-        const managedDownload = new ManagedDownload(s3);
+        const managedDownloader = new ManagedDownloader(s3);
 
         const params = {
             Bucket: 'example-bucket',
@@ -148,7 +148,7 @@ Get the file 'example-key' from the bucket 'example-bucket' and use the getObjec
         // create a write stream for a file starting at byte 100
         const writeStream = fs.createWriteStream('example-file-path', {start:100});
         
-        managedDownload.getObjectStream(params)
+        managedDownloader.getObjectStream(params)
         .then((stream) => {
             stream.pipe(writeStream);
         }, (err) => {
@@ -159,11 +159,11 @@ Get the file 'example-key' from the bucket 'example-bucket' and use the getObjec
 #### TypeScript
 
         import * as S3 from 'aws-sdk/clients/s3';
-        import { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } from '@aws/s3-managed-download';
+        import { ManagedDownloader, GetObjectStreamInput, ManagedDownloaderOptions } from '@aws/s3-managed-download';
         import * as fs from 'fs';
 
         const s3:S3 = new S3();
-        const managedDownload:ManagedDownload = new ManagedDownload(s3);
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(s3);
         
         const params:GetObjectStreamInput = {
             Bucket: 'example-bucket',
@@ -173,7 +173,7 @@ Get the file 'example-key' from the bucket 'example-bucket' and use the getObjec
         // create a write stream for a file starting at byte 100
         const writeStream:fs.WriteStream = fs.createWriteStream('example-file-path', {start:100});
         
-        managedDownload.getObjectStream(params)
+        managedDownloader.getObjectStream(params)
         .then((stream) => {
             stream.pipe(writeStream);
         }, (err) => {
