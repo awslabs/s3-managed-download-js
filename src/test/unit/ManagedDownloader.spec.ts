@@ -1,4 +1,4 @@
-import { ManagedDownload, ManagedDownloadOptions, GetObjectStreamInput } from '../../ManagedDownload';
+import { ManagedDownloader, ManagedDownloaderOptions, GetObjectStreamInput } from '../../ManagedDownloader';
 import * as S3 from 'aws-sdk/clients/s3';
 import { getRangeOfPart } from '../../getRangeOfPart';
 import { getInformationFromRange } from '../../getInformationFromRange';
@@ -19,7 +19,7 @@ const getObjectMockError = () => {
     }
 }
 
-describe('ManagedDownload constructor', () => {
+describe('ManagedDownloader constructor', () => {
 
     const Mock = jest.fn<S3>(() => ({
             getObject: jest.fn(() => 
@@ -30,42 +30,42 @@ describe('ManagedDownload constructor', () => {
     const mock = new Mock();
 
     it('will create an options object with defaults set if no options are provided', () => {
-        const managedDownload:ManagedDownload = new ManagedDownload(mock);
-        expect((managedDownload as any).maxPartSize)
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(mock);
+        expect((managedDownloader as any).maxPartSize)
         .toBe(1024*1024*5);
     });
 
     it('will set options to provided options', () => {
-        const options:ManagedDownloadOptions = {
+        const options:ManagedDownloaderOptions = {
             maxPartSize:1024*1024*4
         }
-        const managedDownload:ManagedDownload = new ManagedDownload(mock, options);
-        expect((managedDownload as any).maxPartSize)
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(mock, options);
+        expect((managedDownloader as any).maxPartSize)
         .toBe(1024*1024*4);
     });
 
     it('will set options to provided options and defaults if not all options are provided', () => {
-        const options:ManagedDownloadOptions = {}
-        const managedDownload:ManagedDownload = new ManagedDownload(mock, options);
-        expect((managedDownload as any).maxPartSize)
+        const options:ManagedDownloaderOptions = {}
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(mock, options);
+        expect((managedDownloader as any).maxPartSize)
         .toBe(1024*1024*5);
     });
 
     it('will throw an error if the client is not provided', () => {
         //@ts-ignore
-        expect(() => new ManagedDownload()).toThrow(Error('S3 client must be provided'));
+        expect(() => new ManagedDownloader()).toThrow(Error('S3 client must be provided'));
     });
 
     it('will throw an error if maximum part size is invalid', () => {
-        const options:ManagedDownloadOptions = {maxPartSize: -1};
+        const options:ManagedDownloaderOptions = {maxPartSize: -1};
         //@ts-ignore
-        expect(() => new ManagedDownload(mock, options)).toThrow(Error('Maximum part size must be a positive number'));
+        expect(() => new ManagedDownloader(mock, options)).toThrow(Error('Maximum part size must be a positive number'));
     });
 
     it('will throw an error if maximum concurrency is invalid', () => {
-        const options:ManagedDownloadOptions = {maxConcurrency: -1};
+        const options:ManagedDownloaderOptions = {maxConcurrency: -1};
         //@ts-ignore
-        expect(() => new ManagedDownload(mock, options)).toThrow(Error('Maximum concurrency must be a positive number'));
+        expect(() => new ManagedDownloader(mock, options)).toThrow(Error('Maximum concurrency must be a positive number'));
     });
 
 });
@@ -125,8 +125,8 @@ describe('getObjectStream', () => {
             })
         );
         const mock = new Mock();
-        const managedDownload:ManagedDownload = new ManagedDownload(mock);
-        expect(managedDownload.getObjectStream(source)).toBeInstanceOf(Promise);
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(mock);
+        expect(managedDownloader.getObjectStream(source)).toBeInstanceOf(Promise);
     });
 
     it('will call getObject with the first range being bytes=0-[maxPartSize-1]', async() => {
@@ -140,8 +140,8 @@ describe('getObjectStream', () => {
             })
         );
         const mock = new Mock();
-        const managedDownload = new ManagedDownload(mock, {maxPartSize:10});
-        managedDownload.getObjectStream(source);
+        const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10});
+        managedDownloader.getObjectStream(source);
         expect(mock.getObject).toHaveBeenCalledWith(
             {
                 Key:source.Key,
@@ -169,9 +169,9 @@ describe('getObjectStream', () => {
         );
         let downloadError:Error|undefined;
         const mock = new Mock();
-        const managedDownload:ManagedDownload = new ManagedDownload(mock);
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(mock);
         try {
-            await managedDownload.getObjectStream(source);
+            await managedDownloader.getObjectStream(source);
         } catch(err) {
             downloadError = err;
         }
@@ -198,9 +198,9 @@ describe('getObjectStream', () => {
         );
         let downloadError:Error|undefined;
         const mock = new Mock();
-        const managedDownload:ManagedDownload = new ManagedDownload(mock);
+        const managedDownloader:ManagedDownloader = new ManagedDownloader(mock);
         try {
-            await managedDownload.getObjectStream(source);
+            await managedDownloader.getObjectStream(source);
         } catch(err) {
             downloadError = err;
         }
@@ -223,10 +223,10 @@ describe('getObjectStream', () => {
                 })
             );
             const mock = new Mock();
-            const managedDownload = new ManagedDownload(mock, {maxPartSize:10});
-            const spy = jest.spyOn((managedDownload as any), 'downloadByParts');
+            const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10});
+            const spy = jest.spyOn((managedDownloader as any), 'downloadByParts');
             expect.assertions(2);
-            await managedDownload.getObjectStream(source);
+            await managedDownloader.getObjectStream(source);
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(
                 expect.any(Object),
@@ -250,10 +250,10 @@ describe('getObjectStream', () => {
                 })
             );
             const mock = new Mock();
-            const managedDownload = new ManagedDownload(mock, {maxPartSize:10});
-            const spy = jest.spyOn((managedDownload as any), 'downloadByParts');
+            const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10});
+            const spy = jest.spyOn((managedDownloader as any), 'downloadByParts');
             expect.assertions(1);
-            await managedDownload.getObjectStream(source);
+            await managedDownloader.getObjectStream(source);
             expect(spy).toHaveBeenCalledTimes(0);
         });
     });
@@ -271,10 +271,10 @@ describe('getObjectStream', () => {
                 )
             }));
             const mock = new Mock();
-            const managedDownload = new ManagedDownload(mock);
-            const spy = jest.spyOn((managedDownload as any), 'downloadByParts');
+            const managedDownloader = new ManagedDownloader(mock);
+            const spy = jest.spyOn((managedDownloader as any), 'downloadByParts');
             expect.assertions(1);
-            await managedDownload.getObjectStream(source);
+            await managedDownloader.getObjectStream(source);
             expect(spy).toHaveBeenCalledTimes(0);
         });
 
@@ -290,8 +290,8 @@ describe('getObjectStream', () => {
                 })
             );
             const mock = new Mock();
-            const managedDownload = new ManagedDownload(mock, {maxPartSize:10});
-            managedDownload.getObjectStream(source);
+            const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10});
+            managedDownloader.getObjectStream(source);
             expect(mock.getObject).toHaveBeenCalledWith(
                 {
                     Key:source.Key,
@@ -330,9 +330,9 @@ describe('downloadByParts', () => {
             })
         );
         const mock = new Mock();
-        const managedDownload = new ManagedDownload(mock, {maxPartSize:10});
+        const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10});
         expect.assertions(2);
-        await (managedDownload as any).downloadByParts(source, stream, 100);
+        await (managedDownloader as any).downloadByParts(source, stream, 100);
         expect(mock.getObject).toHaveBeenCalledTimes(10);
         expect(mock.getObject).toHaveBeenLastCalledWith(
             {
@@ -360,12 +360,12 @@ describe('downloadByParts', () => {
             ).mockReturnValue(getObjectMockError())
         }));
         const mock = new Mock();
-        const managedDownload = new ManagedDownload(mock, {maxPartSize:10});
+        const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10});
         const func = new Promise((resolve, reject) => {
             stream.on('error', (err) => {
                 reject(err);
             });
-            (managedDownload as any).downloadByParts(source, stream, 100)
+            (managedDownloader as any).downloadByParts(source, stream, 100)
         });
         await expect(func).rejects.toBeInstanceOf(Error);
         expect(mock.getObject).toHaveBeenCalledTimes(3);
@@ -402,7 +402,7 @@ describe('downloadByParts', () => {
         streamMock.end = jest.fn(() => {
             streamMock.emit('end');
         });
-        const managedDownload = new ManagedDownload(mock, {maxPartSize:10});
+        const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10});
         const func = new Promise((resolve, reject) => {
             streamMock
             .on('error', (err) => {
@@ -411,7 +411,7 @@ describe('downloadByParts', () => {
             .on('end', () => {
                 resolve(true);
             });
-            (managedDownload as any).downloadByParts(source, streamMock, 50);
+            (managedDownloader as any).downloadByParts(source, streamMock, 50);
             setTimeout(() => {
                 streamMock.emit('drain');
             }, 3000);
@@ -440,10 +440,10 @@ describe('downloadByParts', () => {
                 })
             );
             const mock = new Mock();
-            const managedDownload = new ManagedDownload(mock, {maxPartSize:50});
+            const managedDownloader = new ManagedDownloader(mock, {maxPartSize:50});
             expect.assertions(2);
             // last 2 args are length:600 (799-199) and byteOffset:199 (start byte)
-            await (managedDownload as any).downloadByParts(source, stream, 600, 199);
+            await (managedDownloader as any).downloadByParts(source, stream, 600, 199);
             expect(mock.getObject).toHaveBeenCalledTimes(12);
             expect(mock.getObject).toHaveBeenLastCalledWith(
                 {
@@ -489,7 +489,7 @@ describe('downloadByParts', () => {
                     )
                 }));
                 const mock = new Mock();
-                const managedDownload = new ManagedDownload(mock, {maxPartSize:10, maxConcurrency:x});
+                const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10, maxConcurrency:x});
                 let getObjectBodyIndex = 0;
                 const func = new Promise((resolve, reject) => {
                     stream
@@ -507,7 +507,7 @@ describe('downloadByParts', () => {
                     .on('error', (err) => {
                         reject(err);
                     });
-                    (managedDownload as any).downloadByParts(source, stream, 50)
+                    (managedDownloader as any).downloadByParts(source, stream, 50)
                 });
                 await expect(func).resolves.toBe(true);
                 expect(mock.getObject).toHaveBeenCalledTimes(5);
@@ -527,9 +527,9 @@ describe('downloadByParts', () => {
                     })
                 );
                 const mock = new Mock();
-                const managedDownload = new ManagedDownload(mock, {maxPartSize:10, maxConcurrency:x});
+                const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10, maxConcurrency:x});
                 expect.assertions(2);
-                await (managedDownload as any).downloadByParts(source, stream, 100);
+                await (managedDownloader as any).downloadByParts(source, stream, 100);
                 expect(mock.getObject).toHaveBeenCalledTimes(10);
                 expect(mock.getObject).toHaveBeenLastCalledWith(
                     {
@@ -573,7 +573,7 @@ describe('downloadByParts', () => {
                 
                 }));
                 const mock = new Mock();
-                const managedDownload = new ManagedDownload(mock, {maxPartSize:10, maxConcurrency:x});
+                const managedDownloader = new ManagedDownloader(mock, {maxPartSize:10, maxConcurrency:x});
                 const func = new Promise((resolve, reject) => {
                     let getObjectCounter = 0;
                     stream
@@ -583,7 +583,7 @@ describe('downloadByParts', () => {
                     .on('error', (err) => {
                         reject(getObjectCounter);
                     });
-                    (managedDownload as any).downloadByParts(source, stream, 100)
+                    (managedDownloader as any).downloadByParts(source, stream, 100)
                 });
                 // regardless of the concurrency and the number of
                 // getObject requests it makes, it should stop writing after 2

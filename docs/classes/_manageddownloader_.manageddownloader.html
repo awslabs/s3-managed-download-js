@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ManagedDownload | @aws/s3-managed-download</title>
+	<title>ManagedDownloader | @aws/s3-managed-downloader</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@aws/s3-managed-download</a>
+					<a href="../index.html" class="title">@aws/s3-managed-downloader</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_manageddownload_.html">&quot;ManagedDownload&quot;</a>
+					<a href="../modules/_manageddownloader_.html">&quot;ManagedDownloader&quot;</a>
 				</li>
 				<li>
-					<a href="_manageddownload_.manageddownload.html">ManagedDownload</a>
+					<a href="_manageddownloader_.manageddownloader.html">ManagedDownloader</a>
 				</li>
 			</ul>
-			<h1>Class ManagedDownload</h1>
+			<h1>Class ManagedDownloader</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The ManagedDownload class handles custom S3 downloads.
+						<p>The ManagedDownloader class handles custom S3 downloads.
 							A client can set options for the download such as
 						the part size and the concurrency.</p>
 					</div>
@@ -80,7 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ManagedDownload</span>
+						<span class="target">ManagedDownloader</span>
 					</li>
 				</ul>
 			</section>
@@ -91,23 +91,23 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_manageddownload_.manageddownload.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_manageddownloader_.manageddownloader.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_manageddownload_.manageddownload.html#client" class="tsd-kind-icon">client</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_manageddownload_.manageddownload.html#maxconcurrency" class="tsd-kind-icon">max<wbr>Concurrency</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_manageddownload_.manageddownload.html#maxpartsize" class="tsd-kind-icon">max<wbr>Part<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_manageddownloader_.manageddownloader.html#client" class="tsd-kind-icon">client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_manageddownloader_.manageddownloader.html#maxconcurrency" class="tsd-kind-icon">max<wbr>Concurrency</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_manageddownloader_.manageddownloader.html#maxpartsize" class="tsd-kind-icon">max<wbr>Part<wbr>Size</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_manageddownload_.manageddownload.html#downloadbyparts" class="tsd-kind-icon">download<wbr>ByParts</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_manageddownload_.manageddownload.html#getobjectstream" class="tsd-kind-icon">get<wbr>Object<wbr>Stream</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_manageddownload_.manageddownload.html#waitfordrainevent" class="tsd-kind-icon">wait<wbr>For<wbr>Drain<wbr>Event</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_manageddownloader_.manageddownloader.html#downloadbyparts" class="tsd-kind-icon">download<wbr>ByParts</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_manageddownloader_.manageddownloader.html#getobjectstream" class="tsd-kind-icon">get<wbr>Object<wbr>Stream</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_manageddownloader_.manageddownloader.html#waitfordrainevent" class="tsd-kind-icon">wait<wbr>For<wbr>Drain<wbr>Event</a></li>
 							</ul>
 						</section>
 					</div>
@@ -119,18 +119,18 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Managed<wbr>Download<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S3</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_manageddownload_.manageddownloadoptions.html" class="tsd-signature-type">ManagedDownloadOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_manageddownload_.manageddownload.html" class="tsd-signature-type">ManagedDownload</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Managed<wbr>Downloader<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">S3</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_manageddownloader_.manageddownloaderoptions.html" class="tsd-signature-type">ManagedDownloaderOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_manageddownloader_.manageddownloader.html" class="tsd-signature-type">ManagedDownloader</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SrutiG/s3-managed-download-js/blob/2d6124a/src/ManagedDownload.ts#L55">ManagedDownload.ts:55</a></li>
+									<li>Defined in ManagedDownloader.ts:55</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Create a ManagedDownload object with an
+									<p>Create a ManagedDownloader object with an
 									s3 client and custom options if provided.</p>
 								</div>
 								<dl class="tsd-comment-tags">
@@ -156,7 +156,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_manageddownload_.manageddownloadoptions.html" class="tsd-signature-type">ManagedDownloadOptions</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_manageddownloader_.manageddownloaderoptions.html" class="tsd-signature-type">ManagedDownloaderOptions</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>configuration for the managed download.</p>
@@ -164,7 +164,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_manageddownload_.manageddownload.html" class="tsd-signature-type">ManagedDownload</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_manageddownloader_.manageddownloader.html" class="tsd-signature-type">ManagedDownloader</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -177,7 +177,7 @@
 					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">S3</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SrutiG/s3-managed-download-js/blob/2d6124a/src/ManagedDownload.ts#L67">ManagedDownload.ts:67</a></li>
+							<li>Defined in ManagedDownloader.ts:67</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -192,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Concurrency<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SrutiG/s3-managed-download-js/blob/2d6124a/src/ManagedDownload.ts#L55">ManagedDownload.ts:55</a></li>
+							<li>Defined in ManagedDownloader.ts:55</li>
 						</ul>
 					</aside>
 				</section>
@@ -202,7 +202,7 @@
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Part<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/SrutiG/s3-managed-download-js/blob/2d6124a/src/ManagedDownload.ts#L54">ManagedDownload.ts:54</a></li>
+							<li>Defined in ManagedDownloader.ts:54</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,13 +223,13 @@
 					<a name="downloadbyparts" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> download<wbr>ByParts</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">download<wbr>ByParts<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><a href="../interfaces/_manageddownload_.getobjectstreaminput.html" class="tsd-signature-type">GetObjectStreamInput</a>, destinationStream<span class="tsd-signature-symbol">: </span><a href="_manageddownloadstream_.manageddownloadstream.html" class="tsd-signature-type">ManagedDownloadStream</a>, contentLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, byteOffset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, startingPart<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">download<wbr>ByParts<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><a href="../interfaces/_manageddownloader_.getobjectstreaminput.html" class="tsd-signature-type">GetObjectStreamInput</a>, destinationStream<span class="tsd-signature-symbol">: </span><a href="_manageddownloaderstream_.manageddownloaderstream.html" class="tsd-signature-type">ManagedDownloaderStream</a>, contentLength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, byteOffset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, startingPart<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SrutiG/s3-managed-download-js/blob/2d6124a/src/ManagedDownload.ts#L170">ManagedDownload.ts:170</a></li>
+									<li>Defined in ManagedDownloader.ts:170</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -245,16 +245,16 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>params: <a href="../interfaces/_manageddownload_.getobjectstreaminput.html" class="tsd-signature-type">GetObjectStreamInput</a></h5>
+									<h5>params: <a href="../interfaces/_manageddownloader_.getobjectstreaminput.html" class="tsd-signature-type">GetObjectStreamInput</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>params object contains the bucket
 										and key.</p>
 									</div>
 								</li>
 								<li>
-									<h5>destinationStream: <a href="_manageddownloadstream_.manageddownloadstream.html" class="tsd-signature-type">ManagedDownloadStream</a></h5>
+									<h5>destinationStream: <a href="_manageddownloaderstream_.manageddownloaderstream.html" class="tsd-signature-type">ManagedDownloaderStream</a></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the ManagedDownloadStream stream
+										<p>the ManagedDownloaderStream stream
 										transferring the parts of a file.</p>
 									</div>
 								</li>
@@ -286,13 +286,13 @@
 					<a name="getobjectstream" class="tsd-anchor"></a>
 					<h3>get<wbr>Object<wbr>Stream</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Object<wbr>Stream<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><a href="../interfaces/_manageddownload_.getobjectstreaminput.html" class="tsd-signature-type">GetObjectStreamInput</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_manageddownloadstream_.manageddownloadstream.html" class="tsd-signature-type">ManagedDownloadStream</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Object<wbr>Stream<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><a href="../interfaces/_manageddownloader_.getobjectstreaminput.html" class="tsd-signature-type">GetObjectStreamInput</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_manageddownloaderstream_.manageddownloaderstream.html" class="tsd-signature-type">ManagedDownloaderStream</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SrutiG/s3-managed-download-js/blob/2d6124a/src/ManagedDownload.ts#L111">ManagedDownload.ts:111</a></li>
+									<li>Defined in ManagedDownloader.ts:111</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -315,7 +315,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>params: <a href="../interfaces/_manageddownload_.getobjectstreaminput.html" class="tsd-signature-type">GetObjectStreamInput</a></h5>
+									<h5>params: <a href="../interfaces/_manageddownloader_.getobjectstreaminput.html" class="tsd-signature-type">GetObjectStreamInput</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>an object in the format
 											{
@@ -327,8 +327,8 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_manageddownloadstream_.manageddownloadstream.html" class="tsd-signature-type">ManagedDownloadStream</a><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>ManagedDownloadStream the PassThrough stream to read
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_manageddownloaderstream_.manageddownloaderstream.html" class="tsd-signature-type">ManagedDownloaderStream</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>ManagedDownloaderStream the PassThrough stream to read
 							file data from.</p>
 						</li>
 					</ul>
@@ -337,13 +337,13 @@
 					<a name="waitfordrainevent" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> wait<wbr>For<wbr>Drain<wbr>Event</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">wait<wbr>For<wbr>Drain<wbr>Event<span class="tsd-signature-symbol">(</span>destinationStream<span class="tsd-signature-symbol">: </span><a href="_manageddownloadstream_.manageddownloadstream.html" class="tsd-signature-type">ManagedDownloadStream</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">wait<wbr>For<wbr>Drain<wbr>Event<span class="tsd-signature-symbol">(</span>destinationStream<span class="tsd-signature-symbol">: </span><a href="_manageddownloaderstream_.manageddownloaderstream.html" class="tsd-signature-type">ManagedDownloaderStream</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/SrutiG/s3-managed-download-js/blob/2d6124a/src/ManagedDownload.ts#L219">ManagedDownload.ts:219</a></li>
+									<li>Defined in ManagedDownloader.ts:219</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -356,7 +356,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>destinationStream: <a href="_manageddownloadstream_.manageddownloadstream.html" class="tsd-signature-type">ManagedDownloadStream</a></h5>
+									<h5>destinationStream: <a href="_manageddownloaderstream_.manageddownloaderstream.html" class="tsd-signature-type">ManagedDownloaderStream</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the stream
 											that is being watched for the drain
@@ -377,10 +377,10 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_manageddownload_.html">"<wbr>Managed<wbr>Download"</a>
+						<a href="../modules/_manageddownloader_.html">"<wbr>Managed<wbr>Downloader"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_manageddownloadstream_.html">"<wbr>Managed<wbr>Download<wbr>Stream"</a>
+						<a href="../modules/_manageddownloaderstream_.html">"<wbr>Managed<wbr>Downloader<wbr>Stream"</a>
 					</li>
 				</ul>
 			</nav>
@@ -389,38 +389,38 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_manageddownload_.manageddownload.html" class="tsd-kind-icon">Managed<wbr>Download</a>
+						<a href="_manageddownloader_.manageddownloader.html" class="tsd-kind-icon">Managed<wbr>Downloader</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_manageddownload_.manageddownload.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_manageddownloader_.manageddownloader.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_manageddownload_.manageddownload.html#client" class="tsd-kind-icon">client</a>
+								<a href="_manageddownloader_.manageddownloader.html#client" class="tsd-kind-icon">client</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_manageddownload_.manageddownload.html#maxconcurrency" class="tsd-kind-icon">max<wbr>Concurrency</a>
+								<a href="_manageddownloader_.manageddownloader.html#maxconcurrency" class="tsd-kind-icon">max<wbr>Concurrency</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_manageddownload_.manageddownload.html#maxpartsize" class="tsd-kind-icon">max<wbr>Part<wbr>Size</a>
+								<a href="_manageddownloader_.manageddownloader.html#maxpartsize" class="tsd-kind-icon">max<wbr>Part<wbr>Size</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_manageddownload_.manageddownload.html#downloadbyparts" class="tsd-kind-icon">download<wbr>ByParts</a>
+								<a href="_manageddownloader_.manageddownloader.html#downloadbyparts" class="tsd-kind-icon">download<wbr>ByParts</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_manageddownload_.manageddownload.html#getobjectstream" class="tsd-kind-icon">get<wbr>Object<wbr>Stream</a>
+								<a href="_manageddownloader_.manageddownloader.html#getobjectstream" class="tsd-kind-icon">get<wbr>Object<wbr>Stream</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_manageddownload_.manageddownload.html#waitfordrainevent" class="tsd-kind-icon">wait<wbr>For<wbr>Drain<wbr>Event</a>
+								<a href="_manageddownloader_.manageddownloader.html#waitfordrainevent" class="tsd-kind-icon">wait<wbr>For<wbr>Drain<wbr>Event</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_manageddownload_.getobjectstreaminput.html" class="tsd-kind-icon">Get<wbr>Object<wbr>Stream<wbr>Input</a>
+						<a href="../interfaces/_manageddownloader_.getobjectstreaminput.html" class="tsd-kind-icon">Get<wbr>Object<wbr>Stream<wbr>Input</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_manageddownload_.manageddownloadoptions.html" class="tsd-kind-icon">Managed<wbr>Download<wbr>Options</a>
+						<a href="../interfaces/_manageddownloader_.manageddownloaderoptions.html" class="tsd-kind-icon">Managed<wbr>Downloader<wbr>Options</a>
 					</li>
 				</ul>
 			</nav>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@aws/s3-managed-download</title>
+	<title>@aws/s3-managed-downloader</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@aws/s3-managed-download</a>
+					<a href="index.html" class="title">@aws/s3-managed-downloader</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> @aws/s3-managed-download</h1>
+			<h1> @aws/s3-managed-downloader</h1>
 		</div>
 	</div>
 </header>
@@ -76,18 +76,18 @@
 				<p>You will need an S3 client in order to create a managed download, so import the aws-sdk along with the managed download package.</p>
 				<h4 id="javascript">JavaScript</h4>
 				<pre><code>    <span class="hljs-keyword">const</span> S3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk/clients/s3'</span>);
-    <span class="hljs-keyword">const</span> ManagedDownload = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownload;
+    <span class="hljs-keyword">const</span> ManagedDownloader = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownloader;
 </code></pre><h4 id="typescript">TypeScript</h4>
 				<pre><code>    <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> S3 <span class="hljs-keyword">from</span> <span class="hljs-string">'aws-sdk/clients/s3'</span>;
-    <span class="hljs-keyword">import</span> { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
+    <span class="hljs-keyword">import</span> { ManagedDownloader, GetObjectStreamInput, ManagedDownloaderOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
 </code></pre><h3 id="create-a-managed-download-with-the-default-part-size-and-concurrency">Create a Managed Download with the default part size and concurrency</h3>
 				<p>Create an AWS S3 client and pass the client into the Managed Download constructor to create a Managed Download with a part size of 5MB and concurrency of 1.</p>
 				<h4 id="javascript">JavaScript</h4>
 				<pre><code>    const <span class="hljs-built_in">s3</span> = new <span class="hljs-built_in">S3</span>()<span class="hljs-comment">;</span>
-    const managedDownload = new ManagedDownload(<span class="hljs-built_in">s3</span>)<span class="hljs-comment">;</span>
+    const managedDownloader = new ManagedDownloader(<span class="hljs-built_in">s3</span>)<span class="hljs-comment">;</span>
 </code></pre><h4 id="typescript">TypeScript</h4>
 				<pre><code>    const <span class="hljs-built_in">s3</span>:<span class="hljs-built_in">S3</span> = new <span class="hljs-built_in">S3</span>()<span class="hljs-comment">;</span>
-    const managedDownload:ManagedDownload = new ManagedDownload(<span class="hljs-built_in">s3</span>)<span class="hljs-comment">;</span>
+    const managedDownloader:ManagedDownloader = new ManagedDownloader(<span class="hljs-built_in">s3</span>)<span class="hljs-comment">;</span>
 </code></pre><h3 id="create-a-managed-download-with-custom-part-size-and-concurrency">Create a Managed Download with custom part size and concurrency</h3>
 				<p>Create an AWS S3 client and Managed Download options. Pass the client and the options into the Managed Download constructor to create a Managed Download with a custom part size of 10MB and concurrency of 5.</p>
 				<h4 id="javascript">JavaScript</h4>
@@ -96,14 +96,14 @@
 <span class="hljs-symbol">        maxPartSize:</span> <span class="hljs-number">10</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>,
 <span class="hljs-symbol">        maxConcurrency:</span> <span class="hljs-number">5</span>
     }<span class="hljs-comment">;</span>
-    const managedDownload = new ManagedDownload(<span class="hljs-built_in">s3</span>, options)<span class="hljs-comment">;</span>
+    const managedDownloader = new ManagedDownloader(<span class="hljs-built_in">s3</span>, options)<span class="hljs-comment">;</span>
 </code></pre><h4 id="typescript">TypeScript</h4>
 				<pre><code>    const <span class="hljs-built_in">s3</span>:<span class="hljs-built_in">S3</span> = new <span class="hljs-built_in">S3</span>()<span class="hljs-comment">;</span>
-    const options:ManagedDownloadOptons = {
+    const options:ManagedDownloaderOptons = {
 <span class="hljs-symbol">        maxPartSize:</span> <span class="hljs-number">10</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>,
 <span class="hljs-symbol">        maxConcurrency:</span> <span class="hljs-number">5</span>
     }<span class="hljs-comment">;</span>
-    const managedDownload:ManagedDownload = new ManagedDownload(<span class="hljs-built_in">s3</span>, options)<span class="hljs-comment">;</span>
+    const managedDownloader:ManagedDownloader = new ManagedDownloader(<span class="hljs-built_in">s3</span>, options)<span class="hljs-comment">;</span>
 </code></pre><h2 id="examples">Examples</h2>
 				<p>Currently, the Managed Download only contains a streaming download operation which can work for an entire file or a specific range or part of a file. Here are some examples on
 				how to use the Managed Download&#39;s getObjectStream download operation.</p>
@@ -111,11 +111,11 @@
 				<p>Get the file &#39;example-key&#39; from the bucket &#39;example-bucket&#39; and use the getObjectStream method to create a local file at &#39;example-file-path&#39;.</p>
 				<h4 id="javascript">JavaScript</h4>
 				<pre><code>    <span class="hljs-keyword">const</span> S3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk/clients/s3'</span>);
-    <span class="hljs-keyword">const</span> ManagedDownload = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownload;
+    <span class="hljs-keyword">const</span> ManagedDownloader = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownloader;
     <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 
     <span class="hljs-keyword">const</span> s3 = <span class="hljs-keyword">new</span> S3();
-    <span class="hljs-keyword">const</span> managedDownload = <span class="hljs-keyword">new</span> ManagedDownload(s3);
+    <span class="hljs-keyword">const</span> managedDownloader = <span class="hljs-keyword">new</span> ManagedDownloader(s3);
 
     <span class="hljs-keyword">const</span> params = {
         Bucket: <span class="hljs-string">'example-bucket'</span>,
@@ -124,7 +124,7 @@
     <span class="hljs-comment">// create a write stream for a file</span>
     <span class="hljs-keyword">const</span> writeStream = fs.createWriteStream(<span class="hljs-string">'example-file-path'</span>);
 
-    managedDownload.getObjectStream(params)
+    managedDownloader.getObjectStream(params)
     .then(<span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
         stream.pipe(writeStream);
     }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
@@ -133,11 +133,11 @@
     });
 </code></pre><h4 id="typescript">TypeScript</h4>
 				<pre><code>    <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> S3 <span class="hljs-keyword">from</span> <span class="hljs-string">'aws-sdk/clients/s3'</span>;
-    <span class="hljs-keyword">import</span> { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
+    <span class="hljs-keyword">import</span> { ManagedDownloader, GetObjectStreamInput, ManagedDownloaderOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
     <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
 
     <span class="hljs-keyword">const</span> s3:S3 = <span class="hljs-keyword">new</span> S3();
-    <span class="hljs-keyword">const</span> managedDownload:ManagedDownload = <span class="hljs-keyword">new</span> ManagedDownload(s3);
+    <span class="hljs-keyword">const</span> managedDownloader:ManagedDownloader = <span class="hljs-keyword">new</span> ManagedDownloader(s3);
 
     <span class="hljs-keyword">const</span> params:GetObjectStreamInput = {
         Bucket: <span class="hljs-string">'example-bucket'</span>,
@@ -146,7 +146,7 @@
     <span class="hljs-comment">// create a write stream for a file</span>
     <span class="hljs-keyword">const</span> writeStream:fs.WriteStream = fs.createWriteStream(<span class="hljs-string">'example-file-path'</span>);
 
-    managedDownload.getObjectStream(params)
+    managedDownloader.getObjectStream(params)
     .then(<span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
         stream.pipe(writeStream);
     }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
@@ -157,11 +157,11 @@
 				<p>Get the file &#39;example-key&#39; from the bucket &#39;example-bucket&#39; and use the getObjectStream method to write to bytes 100-150 of a local file at &#39;example-file-path&#39;.</p>
 				<h4 id="javascript">JavaScript</h4>
 				<pre><code>    <span class="hljs-keyword">const</span> S3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk/clients/s3'</span>);
-    <span class="hljs-keyword">const</span> ManagedDownload = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownload;
+    <span class="hljs-keyword">const</span> ManagedDownloader = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aws/s3-managed-download'</span>).ManagedDownloader;
     <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
 
     <span class="hljs-keyword">const</span> s3 = <span class="hljs-keyword">new</span> S3();
-    <span class="hljs-keyword">const</span> managedDownload = <span class="hljs-keyword">new</span> ManagedDownload(s3);
+    <span class="hljs-keyword">const</span> managedDownloader = <span class="hljs-keyword">new</span> ManagedDownloader(s3);
 
     <span class="hljs-keyword">const</span> params = {
         Bucket: <span class="hljs-string">'example-bucket'</span>,
@@ -171,7 +171,7 @@
     <span class="hljs-comment">// create a write stream for a file starting at byte 100</span>
     <span class="hljs-keyword">const</span> writeStream = fs.createWriteStream(<span class="hljs-string">'example-file-path'</span>, {start:<span class="hljs-number">100</span>});
 
-    managedDownload.getObjectStream(params)
+    managedDownloader.getObjectStream(params)
     .then(<span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
         stream.pipe(writeStream);
     }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
@@ -180,11 +180,11 @@
     });
 </code></pre><h4 id="typescript">TypeScript</h4>
 				<pre><code>    <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> S3 <span class="hljs-keyword">from</span> <span class="hljs-string">'aws-sdk/clients/s3'</span>;
-    <span class="hljs-keyword">import</span> { ManagedDownload, GetObjectStreamInput, ManagedDownloadOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
+    <span class="hljs-keyword">import</span> { ManagedDownloader, GetObjectStreamInput, ManagedDownloaderOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws/s3-managed-download'</span>;
     <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">'fs'</span>;
 
     <span class="hljs-keyword">const</span> s3:S3 = <span class="hljs-keyword">new</span> S3();
-    <span class="hljs-keyword">const</span> managedDownload:ManagedDownload = <span class="hljs-keyword">new</span> ManagedDownload(s3);
+    <span class="hljs-keyword">const</span> managedDownloader:ManagedDownloader = <span class="hljs-keyword">new</span> ManagedDownloader(s3);
 
     <span class="hljs-keyword">const</span> params:GetObjectStreamInput = {
         Bucket: <span class="hljs-string">'example-bucket'</span>,
@@ -194,7 +194,7 @@
     <span class="hljs-comment">// create a write stream for a file starting at byte 100</span>
     <span class="hljs-keyword">const</span> writeStream:fs.WriteStream = fs.createWriteStream(<span class="hljs-string">'example-file-path'</span>, {start:<span class="hljs-number">100</span>});
 
-    managedDownload.getObjectStream(params)
+    managedDownloader.getObjectStream(params)
     .then(<span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
         stream.pipe(writeStream);
     }, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
@@ -214,10 +214,10 @@
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_manageddownload_.html">"<wbr>Managed<wbr>Download"</a>
+						<a href="modules/_manageddownloader_.html">"<wbr>Managed<wbr>Downloader"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_manageddownloadstream_.html">"<wbr>Managed<wbr>Download<wbr>Stream"</a>
+						<a href="modules/_manageddownloaderstream_.html">"<wbr>Managed<wbr>Downloader<wbr>Stream"</a>
 					</li>
 				</ul>
 			</nav>

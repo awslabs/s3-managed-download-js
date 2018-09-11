@@ -1,7 +1,7 @@
 {
-  "name": "@aws/s3-managed-download",
-  "version": "0.8.0",
-  "description": "Managed Download for S3",
+  "name": "@aws/s3-managed-downloader",
+  "version": "0.9.0",
+  "description": "Managed Downloader for S3",
   "main": "./build/index.js",
   "scripts": {
     "pretest": "tsc -p tsconfig.test.json",
